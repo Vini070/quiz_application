@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:quiz_application/quiz_screen.dart';
 import 'package:quiz_application/start_screen.dart';
 
-// [ 5, 10, 15, 20]
-
 void main() {
   runApp(const MainScreen());
 }
@@ -16,6 +14,26 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  dynamic currentScreen;
+
+  @override
+  void initState() {
+    currentScreen = StartScreen(
+      onButtonPressed: switchScreen,
+    );
+    super.initState();
+  }
+
+  void switchScreen() {
+    setState(() {
+      currentScreen = QuizScreen(
+        onQuizComplete: () {
+          print('quiz complete');
+        },
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
             end: Alignment.bottomRight,
             colors: [Color(0xff01356B), Color(0xff0268D1)],
           )),
-          child: const StartScreen(),
+          child: currentScreen,
         ),
       ),
     );
