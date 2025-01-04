@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:quiz_application/components/custom_elevated_button.dart';
+import 'package:quiz_application/data/questions.dart';
 
 class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+  const StartScreen({super.key, required this.onButtonPressed});
+
+  final void Function() onButtonPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +25,7 @@ class StartScreen extends StatelessWidget {
           height: 300,
         ),
         const Gap(83),
-        const CustomElevatedButton('Start Quiz'),
+        CustomElevatedButton('Start Quiz', onTap: onButtonPressed),
       ],
     ));
   }
